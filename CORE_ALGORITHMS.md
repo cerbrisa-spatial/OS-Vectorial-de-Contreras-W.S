@@ -48,3 +48,16 @@ Este vector de estado reducido se empaqueta en el formato de alta densidad de fi
 Para los ingenieros que busquen hacer el sistema aún más rápido:
 1. **Alineación de Caché:** Asegurar que la tabla de Nodos Estelares se aloje por completo en la caché L1/L2 del procesador para que el cálculo de $\vec{T}$ no sufra penalizaciones por accesos al bus del sistema.
 2. **Paralelismo SIMD:** El cálculo de la magnitud $||\vec{T}||$ debe ejecutarse utilizando instrucciones en paralelo para procesar múltiples trayectorias de datos en un solo ciclo de reloj.
+## 6. Gestión de Colisiones y Escalabilidad Dinámica (Octree)
+
+### Protocolo de Arbitraje de Nodos (Multiplexación por Magnitud)
+En escenarios de concurrencia donde múltiples vectores intersectan el mismo nodo $N_i$, el sci-Hypervisor activa un esquema de slots de fase armónica ($S_{A,B,C}$). En caso de saturación, el arbitraje se resuelve mediante la derivada de la magnitud:
+
+$$\text{Prioridad} = \max(||\vec{T}_n||)$$
+
+### Direccionamiento por Octree Variable
+Para mitigar el crecimiento exponencial de la matriz estática más allá de $1024^3$, el direccionamiento se gestiona mediante un árbol octal estocástico. La resolución del cuadrante espacial ($\rho$) es directamente proporcional a la densidad de instrucciones activas:
+
+$$\rho = \frac{\text{Instrucciones Concurrentes}}{\text{Volumen del Cuadrante Virtual}}$$
+
+Un cuadrante solo ejecuta una subdivisión física en microcódigo cuando $\rho > \text{Umbral Crítico}$, manteniendo el mapa global en un peso asintótico a cero.
