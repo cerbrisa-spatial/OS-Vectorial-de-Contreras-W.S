@@ -29,8 +29,8 @@ Si un algoritmo necesita optimizar la velocidad, el módulo interceptor de memor
 ---
 ## 3. El Operador del Eje Z (Traducción de Coordenadas)
 El **Operador del Eje Z ($\hat{Z}_R$)** es la función de transformación encargada de interceptar una dirección lineal binaria de Windows/Linux ($D_L$) y colapsarla en una coordenada tridimensional proyectiva.
-La fórmula de traducción síncrona se define mediante una matriz de proyección armónica basada en los niveles de resonancia ($x1, x40, x1600$):
-$$\hat{Z}_R(D_L) = \begin{pmatrix} X \\ Y \\ Z \end{pmatrix} = \begin{pmatrix} \cos(\theta) & -\sin(\theta) & 0 \\ \sin(\theta) & \cos(\theta) & 0 \\ 0 & 0 & R_{nivel} \end{pmatrix} \begin{pmatrix} D_L \pmod{K_x} \\ D_L \pmod{K_y} \\ D_L \pmod{K_z} \end{pmatrix}$$
+La fórmula de traducción síncrona utiliza escapes cuádruples (`\\\\`) para asegurar que el procesador de Markdown de GitHub renderice correctamente las filas de las matrices:
+$$\hat{Z}_R(D_L) = \begin{pmatrix} X \\\\ Y \\\\ Z \end{pmatrix} = \begin{pmatrix} \cos(\theta) & -\sin(\theta) & 0 \\\\ \sin(\theta) & \cos(\theta) & 0 \\\\ 0 & 0 & R_{nivel} \end{pmatrix} \begin{pmatrix} D_L \pmod{K_x} \\\\ D_L \pmod{K_y} \\\\ D_L \pmod{K_z} \end{pmatrix}$$
 Donde:
 * $D_L$ es la dirección lineal entrante.
 * $K_x, K_y, K_z$ son las constantes de subdivisión del cuadrante galáctico virtual.
@@ -40,8 +40,8 @@ Al ejecutar este producto matricial directamente en los registros vectoriales de
 ---
 ## 4. Persistencia y Matriz de Estado (vOS Checkpoint)
 Para evitar el colapso informático durante un ciclo de interrupción de energía (`Power-Off`), el sistema ejecuta un guardado asíncrono y compacto del estado matricial.
-El estado global persistente ($\Psi$) no guarda el búfer binario clásico; se define como el conjunto indexado de coordenadas activas y fases armónicas en el instante $t$:
-$$\Psi(t) = \left\{ (i, N_i, \theta_t) \mid \forall i \in \text{Nodos Modificados} \right\}$$
+El estado global persistente ($\Psi$) no guarda el búfer binario clásico; se define como el conjunto indexado de coordenadas activas y fases armónicas en el instante $t$ (corregido para evitar errores de delimitador en GitHub):
+$$\Psi(t) = \{ (i, N_i, \theta_t) \mid \forall i \in \text{Nodos Modificados} \}$$
 Este vector de estado reducido se empaqueta en el formato de alta densidad de firmware (`vos_core.vcf`) y se inyecta directamente en la NVRAM del sistema. Al inicializarse el dispositivo (`Cold Boot`), el compilador lee $\Psi(t)$, re-proyectando instantáneamente el firmamento matemático sin requerir reescrituras en unidades electrónicas ni discos físicos.
 ---
 ## 5. Parámetros de Optimización del Algoritmo
