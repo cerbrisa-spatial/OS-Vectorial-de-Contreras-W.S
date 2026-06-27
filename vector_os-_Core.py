@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Vectorial OS (vOS) - MVP del Núcleo Matemático v2.1
+Vectorial OS (vOS) - MVP del Núcleo Matemático v2.2
 Arquitecto y Autor: Wilbert Contreras Borda
 Licencia: LICENCIA DE INVESTIGACIÓN PROPIETARIA WILBERT CONTRERAS v2.0
-Estatus: Patente Pendiente / Simulación Completa del Núcleo
+Estatus: Patente Pendiente / Simulación Completa con Resiliencia Galáctica
 """
 
 import math
@@ -94,22 +94,36 @@ class NúcleoVectorialOS:
         self.cargar_o_inicializar_nodos()
 
     def cargar_o_inicializar_nodos(self):
-        """Carga el punto de restauración (.vcf) o inicializa los nodos de firmware."""
+        """Carga el punto de restauración (.vcf) o reconstruye la matriz desde la Vía Láctea (ROM)."""
         if os.path.exists(self.ruta_checkpoint):
-            print(f"[vOS] Checkpoint detectado: Cargando {self.ruta_checkpoint}...")
-            with open(self.ruta_checkpoint, 'r') as f:
-                datos_checkpoint = json.load(f)
-                self.theta = datos_checkpoint.get("theta", self.theta)
-                for n_id, n_info in datos_checkpoint.get("nodos", {}).items():
-                    self.raiz_espacial.insertar(n_id, n_info)
+            try:
+                print(f"[vOS] Checkpoint detectado: Cargando {self.ruta_checkpoint}...")
+                with open(self.ruta_checkpoint, 'r') as f:
+                    datos_checkpoint = json.load(f)
+                    self.theta = datos_checkpoint.get("theta", self.theta)
+                    for n_id, n_info in datos_checkpoint.get("nodos", {}).items():
+                        self.raiz_espacial.insertar(n_id, n_info)
+            except (json.JSONDecodeError, KeyError, IOError):
+                print("[¡ALERTA vOS!] Archivo de configuración dañado o corrupto.")
+                self.reconstruir_desde_mapa_base_galactico()
         else:
-            print("[vOS] Inicializando matriz de firmamento nativa de bajo nivel...")
-            nodos_base = {
-                "0x0001": {"coords": [10000.0, 64.0, 10000.0], "val": "NÚCLEO", "slots": {"Alfa": None, "Beta": None}},
-                "0x0002": {"coords": [15000.5, 128.0, 30000.25], "val": "MEMORIA", "slots": {"Alfa": None, "Beta": None}}
-            }
-            for n_id, n_info in nodos_base.items():
-                self.raiz_espacial.insertar(n_id, n_info)
+            print("[vOS] Archivo de configuración ausente (Primer Arranque / Instalación Limpia).")
+            self.reconstruir_desde_mapa_base_galactico()
+
+    def reconstruir_desde_mapa_base_galactico(self):
+        """Protocolo de Resiliencia: Carga la matriz inmutable de la Vía Láctea desde la ROM (Ring -3)."""
+        print("[vOS - Firmware Ring -3] Cargando Mapa Base Inmutable de la Vía Láctea desde la ROM...")
+        
+        # Simulación de la estructura de densidad galáctica (Bulbo Central y Brazos Espirales)
+        nodos_galacticos = {
+            "0x0001": {"coords": [16000.0, 16000.0, 16000.0], "val": "BULBO_CENTRAL_CORE", "slots": {"Alfa": None, "Beta": None}},
+            "0x0002": {"code": "Brazo_Orion", "coords": [10000.0, 64.0, 10000.0], "val": "SISTEMA_ARCHIVOS", "slots": {"Alfa": None, "Beta": None}},
+            "0x0003": {"code": "Brazo_Sagitario", "coords": [22000.0, 128.0, 25000.0], "val": "INTERCEPTOR_BUS", "slots": {"Alfa": None, "Beta": None}}
+        }
+        
+        for n_id, n_info in nodos_galacticos.items():
+            self.raiz_espacial.insertar(n_id, n_info)
+        print("[vOS] Espacio proyectivo restablecido con éxito. Sistema operativo en línea en modo seguro.")
 
     def guardar_checkpoint(self):
         """Subsistema de Persistencia (vOS Checkpoint): Snapshot del estado geométrico."""
@@ -159,7 +173,7 @@ class NúcleoVectorialOS:
                 return f"Acceso concedido en Canal de Fase [{slot_id}]"
         
         # 2. Si hay saturación, desempate por la Magnitud Absoluta del Vector (||T||)
-        print(f"[Arbitragem] ¡Colisión de Bus! Canales llenos. Evaluando prioridad por Magnitud Vectorial...")
+        print(f"[Arbitraje] ¡Colisión de Bus! Canales llenos. Evaluando prioridad por Magnitud Vectorial...")
         mag_actual = vector_t["magnitude"]
         mag_competidora = 5000.0  # Umbral de simulación para el MVP
         
@@ -175,6 +189,13 @@ class NúcleoVectorialOS:
 # ==========================================
 if __name__ == "__main__":
     print("--- INICIALIZANDO MVP DEL NÚCLEO VECTORIAL OS ---")
+    
+    # Simulación de arranque 1: Forzar reconstrucción borrando o ignorando un vcf corrupto
+    print("\n=== PRUEBA 1: ARRANQUE CON FALLO DE CHECKPOINT ===")
+    vos_fail = NúcleoVectorialOS(ruta_checkpoint="corrupto_invalido.vcf")
+    
+    # Simulación de arranque 2: Inicialización estándar o recuperación
+    print("\n=== PRUEBA 2: FLUJO DE TRABAJO ESTÁNDAR ===")
     vos = NúcleoVectorialOS()
 
     # 1. Intercepción y Proyección con el Operador del Eje Z
@@ -190,8 +211,8 @@ if __name__ == "__main__":
 
     # 3. Escalabilidad Dinámica mediante el Octree
     print("\n[3] Inyectando flujos analíticos para forzar subdivisión del Octree...")
-    vos.raiz_espacial.insertar("0x0003", {"coords": [10000.0, 65.0, 10000.0], "val": "CORE_IA", "slots": {"Alfa": None, "Beta": None}})
-    vos.raiz_espacial.insertar("0x0004", {"coords": [10000.0, 66.0, 10000.0], "val": "NODO_RED", "slots": {"Alfa": None, "Beta": None}})
+    vos.raiz_espacial.insertar("0x0004", {"coords": [10000.0, 65.0, 10000.0], "val": "CORE_IA", "slots": {"Alfa": None, "Beta": None}})
+    vos.raiz_espacial.insertar("0x0005", {"coords": [10000.0, 66.0, 10000.0], "val": "NODO_RED", "slots": {"Alfa": None, "Beta": None}})
     
     # Búsqueda estructurada en el árbol
     n_id, n_info = vos.raiz_espacial.buscar_nodo([10000.0, 64.0, 10000.0])
