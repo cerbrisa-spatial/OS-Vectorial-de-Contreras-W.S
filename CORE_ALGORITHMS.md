@@ -38,12 +38,23 @@ Donde:
 * $R_{nivel}$ es el multiplicador de escala del bus ($1, 40, \text{o } 1600$).
 Al ejecutar este producto matricial directamente en los registros vectoriales de la CPU (como las instrucciones AVX-512 o los sombreadores de la GPU), la traducción de la dirección se resuelve de manera inmediata. El resultado de la coordenada arroja el nodo exacto en el espacio de proyección sin consultar la RAM física.
 ---
+
 ## 4. Persistencia y Matriz de Estado (vOS Checkpoint)
 Para evitar el colapso informático durante un ciclo de interrupción de energía (`Power-Off`), el sistema ejecuta un guardado asíncrono y compacto del estado matricial.
 El estado global persistente ($\Psi$) no guarda el búfer binario clásico; se define como el conjunto indexado de coordenadas activas y fases armónicas en el instante $t$ (corregido para evitar errores de delimitador en GitHub):
 $$\Psi(t) = \{ (i, N_i, \theta_t) \mid \forall i \in \text{Nodos Modificados} \}$$
 Este vector de estado reducido se empaqueta en el formato de alta densidad de firmware (`vos_core.vcf`) y se inyecta directamente en la NVRAM del sistema. Al inicializarse el dispositivo (`Cold Boot`), el compilador lee $\Psi(t)$, re-proyectando instantáneamente el firmamento matemático sin requerir reescrituras en unidades electrónicas ni discos físicos.
 ---
+### 4.1. Protocolo de Resiliencia Absoluta: Mapa Base Inmutable (Vía Láctea)
+En caso de corrupción, ausencia o fallo crítico de lectura del archivo de configuración geométrica (`vos_core.vcf`) en la NVRAM, el `Compiler Bridge` intercepta el error en Ring -3 y activa el modo de restauración por hardware.
+
+El sistema no genera un bucle de reinicio (*bootloop*); en su lugar, carga una plantilla geométrica inmutable grabada directamente en la ROM del chip, basada en la distribución de densidad masiva de la **Vía Láctea**:
+
+* **Núcleo Galáctico (Bulbo Central):** Cuadrante de máxima densidad de nodos donde se inicializan las funciones vitales y prioritarias del micronúcleo, minimizando la distancia de enrutamiento físico.
+* **Brazos Espirales Logarítmicos:** Distribución de nodos de datos y diccionarios lingüísticos base siguiendo las curvas físicas de los brazos estelares (Orión, Sagitario, Perseo), garantizando un mapa de indexación natural estático.
+
+Este mecanismo asegura que el sistema sea indestructible: ante la pérdida total de la sesión volátil previa, el universo del vOS se vuelve a proyectar instantáneamente desde su matriz de origen en microsegundos.
+
 ## 5. Parámetros de Optimización del Algoritmo
 Para los ingenieros que busquen hacer el sistema aún más rápido:
 1. **Alineación de Caché:** Asegurar que la tabla de Nodos Estelares se aloje por completo en la caché L1/L2 del procesador para que el cálculo de $\vec{T}$ no sufra penalizaciones por accesos al bus del sistema.
