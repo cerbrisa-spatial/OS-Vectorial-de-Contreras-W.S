@@ -66,7 +66,22 @@ Con el contexto cargado, ejecuta y analiza los componentes de hardware simulado 
 
 ---
 
-## 🛠️ [PASO 3] DESPLIEGUE: Manual de Asistencia (Murales, Cascos y Braille 4D)
-Aplica el código procesado a las interfaces físicas de asistencia educativa para el *high human*:
-* Configura la tasa de refresco visual (*Frame-Rate Matching*).
-* Despliega las reglas para el Sandbox Físico (*White Room* / *Black Room*).
+## 🛠️ [PASO 3]
+You are an expert performance engineer. Analyze and benchmark the Octree implementation in my repository.
+
+Repository: [paste GitHub link or describe files]
+Main file: [e.g., minecraft_chunk_octree.py or specific path]
+
+Please do the following:
+1. Review the current Octree / Chunk + Octree code.
+2. Run or simulate benchmarks for:
+   - Insertion time (scale: 1k, 10k, 100k entities)
+   - Range queries (different radii and densities)
+   - Memory usage
+   - Comparison against naive list scan and (if possible) KD-tree or R-tree
+3. Identify bottlenecks (subdivision, query traversal, chunk management).
+4. Suggest concrete optimizations (Numba, Cython, parallelization, fixed-depth, etc.).
+5. Provide updated code with benchmarks integrated (using timeit, memory_profiler, etc.).
+6. Test with realistic Minecraft-like scenarios (clustered entities, large worlds).
+
+Output: Clear tables, charts (describe or generate code for them), and prioritized recommendations.
