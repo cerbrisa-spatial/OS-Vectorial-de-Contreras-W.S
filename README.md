@@ -83,3 +83,21 @@ Please do the following:
 6. Test with realistic Minecraft-like scenarios (clustered entities, large worlds).
 
 Output: Clear tables, charts (describe or generate code for them), and prioritized recommendations.
+
+
+---
+
+## 🚀 Ejemplo Rápido (Simulación en Python)
+
+```python
+from vos_core import SpatialMemory
+
+# Crear un espacio virtual con Octree dinámico
+memory = SpatialMemory(resolution=1024)
+
+# "Almacenar" una entidad (se calcula su trayectoria)
+entity = memory.create_entity(position=(10, 20, 30), data="Hola Mundo")
+
+# "Leer" la entidad (se recalcula desde el vector)
+result = memory.query_entity(entity.id)
+print(result)  # → "Hola Mundo" (reconstruido desde el vector)
