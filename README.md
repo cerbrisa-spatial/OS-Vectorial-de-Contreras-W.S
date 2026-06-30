@@ -52,12 +52,10 @@ No intentes compilar ni analizar el código sin cargar primero las reglas de la 
 1. `CORE_ALGORITHMS.md` / Secciones Teóricas: 
    * Comprende el marco del **Espacio Latente (4D)** y el descompresor **SCSEL**.
    * Analiza cómo opera la tasa de muestreo (*sampling rate*) y la fase armónica angular de 120°.
-   * Establece el axioma de que el autismo y las interfaces vectoriales operan fuera del tiempo lineal de la 3D.
-
+   
 *Una vez mapeada la geometría conceptual, procede al software.*
 
----
-
+-
 ## 💻 [PASO 2] PRUEBA ESTO DESPUÉS: Validación del Motor Híbrido
 Con el contexto cargado, ejecuta y analiza los componentes de hardware simulado en este orden exacto:
 
